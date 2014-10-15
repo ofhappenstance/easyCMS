@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141015114625) do
+ActiveRecord::Schema.define(version: 20141015140138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,5 +27,39 @@ ActiveRecord::Schema.define(version: 20141015114625) do
   end
 
   add_index "admin_users", ["username"], name: "index_admin_users_on_username", using: :btree
+
+  create_table "pages", force: true do |t|
+    t.string   "name"
+    t.integer  "permalink"
+    t.integer  "position"
+    t.boolean  "visible",    default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "subject_id"
+  end
+
+  add_index "pages", ["permalink"], name: "index_pages_on_permalink", using: :btree
+  add_index "pages", ["subject_id"], name: "index_pages_on_subject_id", using: :btree
+
+  create_table "sections", force: true do |t|
+    t.string   "name"
+    t.integer  "position"
+    t.boolean  "visible",      default: false
+    t.string   "content_type"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "page_id"
+  end
+
+  add_index "sections", ["page_id"], name: "index_sections_on_page_id", using: :btree
+
+  create_table "subjects", force: true do |t|
+    t.string   "name"
+    t.integer  "position"
+    t.boolean  "visible",    default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
