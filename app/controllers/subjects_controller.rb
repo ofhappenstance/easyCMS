@@ -4,6 +4,7 @@ class SubjectsController < ApplicationController
 
   def index
     #@subjects = Subject.all
+    # .sorted is a scope defined in subjects model
     @subjects = Subject.sorted
   end
 
