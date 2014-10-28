@@ -13,6 +13,7 @@ class SubjectsController < ApplicationController
   end
 
   def new
+    @subject = Subject.new({:name => "First Name Last Name"})
   end
 
   def edit
