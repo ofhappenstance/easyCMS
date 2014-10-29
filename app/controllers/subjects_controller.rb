@@ -18,7 +18,7 @@ class SubjectsController < ApplicationController
 
   def create 
     # instantiate a new object using form parameter 
-    @subject = Subject.new(params.require(:subject).permit(:name, :position, :visible))
+    @subject = Subject.new(subject_params)
     # save the object 
     if @subject.save
     # if save succeeds, redirect to the index action 
@@ -34,4 +34,10 @@ class SubjectsController < ApplicationController
 
   def delete
   end
+
+  private
+
+    def subject_params
+      params.require(:subject).permit(:name, :position, :visible)
+    end
 end
