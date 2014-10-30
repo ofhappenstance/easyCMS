@@ -8,4 +8,9 @@ class Page < ActiveRecord::Base
   #if giving table different name, have to specify on both many to many table
   # has_and_belongs_to_many :admin_users, :join_table => "super_users"
 
+  scope :visible, lambda { where(:visible => true) }
+  scope :invisible, lambda { where(:visible => false) }
+  scope :sorted, lambda { order("pages.position ASC") }
+  scope :newest_first, lambda { order("pages.created_at DESC") }
+
 end
