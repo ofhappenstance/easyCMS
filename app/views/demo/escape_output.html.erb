@@ -9,3 +9,12 @@
 
 <%= evil_string %>
 <%= good_string %>
+
+<hr />
+
+<% simple_string = '<strong>Please</strong> visit <a href="http://example.com">us</a>.' %>
+
+<%= strip_links(simple_string) %>
+<%= strip_tags(simple_string) %>
+
+<hr />
