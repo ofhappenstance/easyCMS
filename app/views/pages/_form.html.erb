@@ -1,7 +1,10 @@
 <table summary="Page form fields">
   <tr>
-    <th><%= f.label(:subject_id, "Subject ID") %></th>
-    <td><%= f.text_field(:subject_id) %></td>
+    <th><%= f.label(:subject_id, "Subject") %></th>
+    <!-- 
+    Be great if we could just see a list of all the possible subjects, and pick between them. By name. And then they would submit the ID for us in the background. We need to make sure that we pull out the label and the value that we need, and we can do that with map.
+     -->
+    <td><%= f.select(:subject_id, @subjects.map {|s| [s.name, s.id]}) %></td>
   </tr>
   <tr>
     <th><%= f.label(:name, "Name") %></th>
@@ -13,7 +16,7 @@
   </tr>
   <tr>
     <th><%= f.label(:position) %></th>
-    <td><%= f.text_field(:position) %></td>
+    <td><%= f.select(:position, 1..@page_count) %></td>
   </tr>
   <tr>
     <th><%= f.label(:visible) %></th>
