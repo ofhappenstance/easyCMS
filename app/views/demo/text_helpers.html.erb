@@ -1,0 +1,84 @@
+<%
+text = "This is some long sample text. It includes line breaks\n and double-line breaks.\n\n It rambles on and on and on.\n\n Until we get to this last line."
+%>
+
+<h2>word_wrap</h2>
+<!-- 
+wrap text to line width provided; it adds a "\n" every time it hits 30
+however HTML cannot interpret \n, that's where simple_format comes in
+-->
+<%= word_wrap(text, :line_width => 30) %>
+<hr />
+
+<h2>simple_format</h2>
+<!-- 
+takes \n and converts it to HTML friendly <br> tag
+"\n\n" will convert to new <p>
+-->
+<%= simple_format(text) %>
+<hr />
+
+<h2>simple_format + word_wrap</h2>
+<!-- When we combine simple format and word wrap together then we get the desired wrapping effect in HTML -->
+<%= simple_format(word_wrap(text, :line_width => 30)) %>
+<hr />
+
+<h2>truncate</h2>
+<!--
+  truncates text based on length and ends with omission character, the default is already "..."
+  pass in nil if you don't want any string at all
+  -->
+<%= truncate(text, :length => 40, :omission => "...") %>
+<hr />
+
+<h2>excerpt</h2>
+<!--
+  similar to truncate but looks for target word as cut-off cue 
+  example looks for word include, snip out text from 7 letters before it and after it
+  and ends in omission 
+  -->
+<%= excerpt(text, 'includes', :radius => 7, :omission => "...") %>
+<hr />
+
+<h2>highlight</h2>
+<!--
+ wraps target text to be styled
+  -->
+<%= highlight(text, 'sample text') %>
+<hr />
+<!--
+ accepts an array for multiple targets and replace with placeholder 
+  -->
+<%= highlight(text, ['sample', 'rambles'],
+:highlighter => '<em>\1</em>') %>
+<hr />
+
+<h2>pluralize</h2>
+<!-- 
+  helpful when working with databases 
+  when we query for objects, we don't know ahead of time if we're going to get back zero One or more objects. If we're querying for products, we want to then have the view say, one product, when it only finds one
+
+  We can also define our own additional plurals inside the config directory. Inside initializers in a file called inflections. And there some instructions here on how to go about doing that.
+-->
+<%= "student".pluralize %><br />
+<%= "ox".pluralize %><br />
+<br />
+<!-- 
+same name different method from above, pass in number and string as arguement
+will pluralization depend on count
+ -->
+<%= pluralize(2, 'product') %><br />
+<br />
+<!-- example to illustrate pluralize -->
+<% [0, 1, 20].each do |n| %>
+  <%= pluralize(n, 'product') %><br />
+  <%= pluralize(n, 'octopus') %><br />
+  <%= pluralize(n, 'snipe', 'snope') %><br />
+<% end %>
+<hr />
+
+<h2>cycle</h2>
+<!-- cycle will move down list of value & output it until the counter stops -->
+<% 5.times do %>
+  <%= cycle('red', 'green', 'blue') %><br />
+<% end %>
