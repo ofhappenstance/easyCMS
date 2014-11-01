@@ -18,3 +18,8 @@
 <%= strip_tags(simple_string) %>
 
 <hr />
+
+
+<%= sanitize(evil_string) %><br /> <!-- doesn't output anything  -->
+<%= sanitize(simple_string, :tags => []) %><br /> <!-- make sure you always provide a whitelist -->
+<%= sanitize(simple_string, :tags => ['strong', 'em', 'a']) %><br />
