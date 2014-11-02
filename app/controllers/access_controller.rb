@@ -49,16 +49,4 @@ class AccessController < ApplicationController
     redirect_to(:action => "login")
   end
 
-  private
-
-  def confirm_logged_in
-    unless session[:user_id]
-      flash[:notice] = "Please log in."
-      redirect_to(:action => 'login')
-      return false # halts the before_action
-    else
-      return true
-    end
-  end
-
 end
