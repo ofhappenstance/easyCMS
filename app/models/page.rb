@@ -8,6 +8,8 @@ class Page < ActiveRecord::Base
   #if giving table different name, have to specify on both many to many table
   # has_and_belongs_to_many :admin_users, :join_table => "super_users"
 
+  acts_as_list :scope => :subject 
+
   validates_presence_of :name
   validates_length_of :name, :maximum => 255
   validates_presence_of :permalink
