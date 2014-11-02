@@ -23,3 +23,7 @@
 
 #Ignore secrets.yml
 /config/secrets.yml
+
+#Ignore secret token
+/config/initializers/secret_token.rb
+/config/initializers/session_store.rb
