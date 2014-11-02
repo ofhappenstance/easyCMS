@@ -35,7 +35,17 @@ class AdminUser < ActiveRecord::Base
   
   # custom validation
   validate :username_is_allowed
-  validate :no_new_users_on_saturday, :on => :create
+  # validate :no_new_users_on_saturday, :on => :create
+
+  scope :sorted, lambda { order("last_name ASC, first_name ASC") }
+
+  def name
+    first_name + ' ' + last_name
+    # or "#{first_name} #{last_name}"
+    # or [first_name, last_name].join(' ')
+  end
+
+  private
 
   def username_is_allowed
     if FORBIDDEN_USERNAMES.include?(username)
