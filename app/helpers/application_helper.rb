@@ -1,4 +1,9 @@
-module ApplicationHelper   
+module ApplicationHelper  
+
+  def error_messages_for(object)
+    render(:partial => 'application/error_messages', :locals => {:object => object})
+  end
+
   # be able to call status_tag and pass it a boolean as well as any options defined below
   def status_tag(boolean, options={})
     options[:true_text] ||= ''
