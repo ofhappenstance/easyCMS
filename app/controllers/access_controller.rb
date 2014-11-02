@@ -24,7 +24,12 @@ class AccessController < ApplicationController
       end
     end
     if authorized_user
-      # TODO: add mark user as logged in logic here too
+      # mark user as logged in logic here too
+      session[:user_id] = authorized_user.id
+      session[:username] = authorized_user.username #let's store this value for convenience, 
+                                                    # so that we don't always have to go back to the database to get 
+                                                    #their username again. 
+
       flash[:notice] = "You are now logged in."
       redirect_to(:action => 'index')
     else
@@ -35,6 +40,9 @@ class AccessController < ApplicationController
 
   def logout
     # mark user as logged out
+    session[:user_id] = nil
+    session[:username] = nil
+    
     flash[:notice] = "Logged out"
     redirect_to(:action => "login")
   end
