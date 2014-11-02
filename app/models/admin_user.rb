@@ -30,7 +30,7 @@ class AdminUser < ActiveRecord::Base
                     :length => { :maximum => 100 },
                     :format => EMAIL_REGEX,
                     :confirmation => true
-
+  
   # custom validation
   validate :username_is_allowed
   validate :no_new_users_on_saturday, :on => :create
