@@ -71,4 +71,5 @@ class SectionsController < ApplicationController
         @page = Page.find(params[:page_id])
       end
     end
+
 end
